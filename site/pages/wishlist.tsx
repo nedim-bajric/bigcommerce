@@ -23,12 +23,11 @@ export async function getStaticProps({
   const config = { locale, locales }
   const pagesPromise = commerce.getAllPages({ config, preview })
   const siteInfoPromise = commerce.getSiteInfo({ config, preview })
-  const { pages } = await pagesPromise
+  // const { pages } = await pagesPromise
   const { categories } = await siteInfoPromise
 
-  return {
+  return { 
     props: {
-      pages,
       categories,
     },
   }
