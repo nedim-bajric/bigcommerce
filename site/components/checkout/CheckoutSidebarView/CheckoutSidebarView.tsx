@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { FC, useState } from 'react'
 import CartItem from '@components/cart/CartItem'
 import { Button, Text } from '@components/ui'
-import { useUI } from '@components/ui/context'
 import SidebarLayout from '@components/common/SidebarLayout'
 import useCart from '@framework/cart/use-cart'
 import usePrice from '@framework/product/use-price'
@@ -11,13 +10,28 @@ import ShippingWidget from '../ShippingWidget'
 import PaymentWidget from '../PaymentWidget'
 import s from './CheckoutSidebarView.module.css'
 import { useCheckoutContext } from '../context'
+import { useAppDispatch } from 'redux/hooks'
+import {
+  closeSidebar,
+  setSidebarView,
+  SIDEBAR_VIEWS,
+} from 'redux/Slices/UISlice'
 
 const CheckoutSidebarView: FC = () => {
+  const dispatch = useAppDispatch()
   const [loadingSubmit, setLoadingSubmit] = useState(false)
-  const { setSidebarView, closeSidebar } = useUI()
+
   const { data: cartData, mutate: refreshCart } = useCart()
   const { data: checkoutData, submit: onCheckout } = useCheckout()
   const { clearCheckoutFields } = useCheckoutContext()
+
+  const handleSidebar = (view: SIDEBAR_VIEWS) => {
+    dispatch(setSidebarView(view))
+  }
+
+  const handleClose = () => {
+    dispatch(closeSidebar())
+  }
 
   async function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     try {
@@ -28,7 +42,7 @@ const CheckoutSidebarView: FC = () => {
       clearCheckoutFields()
       setLoadingSubmit(false)
       refreshCart()
-      closeSidebar()
+      handleClose()
     } catch {
       // TODO - handle error UI here.
       setLoadingSubmit(false)
@@ -51,7 +65,7 @@ const CheckoutSidebarView: FC = () => {
   return (
     <SidebarLayout
       className={s.root}
-      handleBack={() => setSidebarView('CART_VIEW')}
+      handleBack={() => handleSidebar('CART_VIEW')}
     >
       <div className="px-4 sm:px-6 flex-1">
         <Link href="/cart">
@@ -60,11 +74,11 @@ const CheckoutSidebarView: FC = () => {
 
         <PaymentWidget
           isValid={checkoutData?.hasPayment}
-          onClick={() => setSidebarView('PAYMENT_VIEW')}
+          onClick={() => handleSidebar('PAYMENT_VIEW')}
         />
         <ShippingWidget
           isValid={checkoutData?.hasShipping}
-          onClick={() => setSidebarView('SHIPPING_VIEW')}
+          onClick={() => handleSidebar('SHIPPING_VIEW')}
         />
 
         <ul className={s.lineItemsList}>

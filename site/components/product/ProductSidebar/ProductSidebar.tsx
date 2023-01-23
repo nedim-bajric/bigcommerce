@@ -3,13 +3,15 @@ import { useAddItem } from '@framework/cart'
 import { FC, useEffect, useState } from 'react'
 import { ProductOptions } from '@components/product'
 import type { Product } from '@commerce/types/product'
-import { Button, Text, Rating, Collapse, useUI } from '@components/ui'
+import { Button, Text, Rating, Collapse } from '@components/ui'
 import {
   getProductVariant,
   selectDefaultOptionFromProduct,
   SelectedOptions,
 } from '../helpers'
 import ErrorMessage from '@components/ui/ErrorMessage'
+import { useAppDispatch } from 'redux/hooks'
+import { openSidebar, setSidebarView } from 'redux/Slices/UISlice'
 
 interface ProductSidebarProps {
   product: Product
@@ -17,11 +19,14 @@ interface ProductSidebarProps {
 }
 
 const ProductSidebar: FC<ProductSidebarProps> = ({ product, className }) => {
+  const dispatch = useAppDispatch()
   const addItem = useAddItem()
-  const { openSidebar, setSidebarView } = useUI()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<null | Error>(null)
   const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>({})
+
+  const handleSidebar = () => dispatch(openSidebar())
+  const handleSidebarView = () => dispatch(setSidebarView('CART_VIEW'))
 
   useEffect(() => {
     selectDefaultOptionFromProduct(product, setSelectedOptions)
@@ -36,8 +41,8 @@ const ProductSidebar: FC<ProductSidebarProps> = ({ product, className }) => {
         productId: String(product.id),
         variantId: String(variant ? variant.id : product.variants[0]?.id),
       })
-      setSidebarView('CART_VIEW')
-      openSidebar()
+      handleSidebarView()
+      handleSidebar()
       setLoading(false)
     } catch (err) {
       setLoading(false)

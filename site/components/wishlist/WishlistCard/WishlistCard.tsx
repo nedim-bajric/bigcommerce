@@ -6,18 +6,20 @@ import s from './WishlistCard.module.css'
 import { Trash } from '@components/icons'
 import { Button, Text } from '@components/ui'
 
-import { useUI } from '@components/ui/context'
 import type { Product } from '@commerce/types/product'
 import usePrice from '@framework/product/use-price'
 import useAddItem from '@framework/cart/use-add-item'
 import useRemoveItem from '@framework/wishlist/use-remove-item'
 import type { WishlistItem } from '@commerce/types/wishlist'
+import { useAppDispatch } from 'redux/hooks'
+import { openSidebar } from 'redux/Slices/UISlice'
 
 const placeholderImg = '/product-img-placeholder.svg'
 
 const WishlistCard: React.FC<{
   item: WishlistItem
 }> = ({ item }) => {
+  const dispatch = useAppDispatch()
   const product: Product = item.product
   const { price } = usePrice({
     amount: product.price?.value,
@@ -32,7 +34,6 @@ const WishlistCard: React.FC<{
   // TODO: fix this missing argument issue
   /* @ts-ignore */
   const addItem = useAddItem()
-  const { openSidebar } = useUI()
 
   const handleRemove = async () => {
     setRemoving(true)
@@ -52,7 +53,7 @@ const WishlistCard: React.FC<{
         productId: String(product.id),
         variantId: String(product.variants[0].id),
       })
-      openSidebar()
+      dispatch(openSidebar())
       setLoading(false)
     } catch (err) {
       setLoading(false)

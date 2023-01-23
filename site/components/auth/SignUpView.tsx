@@ -1,13 +1,17 @@
-import { FC, useEffect, useState, useCallback } from 'react'
+import { FC, useEffect, useState, useCallback, SyntheticEvent } from 'react'
+
 import { validate } from 'email-validator'
+
 import { Info } from '@components/icons'
-import { useUI } from '@components/ui/context'
-import { Logo, Button, Input } from '@components/ui'
+import { useAppDispatch } from 'redux/hooks'
 import useSignup from '@framework/auth/use-signup'
+import { Logo, Button, Input } from '@components/ui'
+import { closeModal, MODAL_VIEWS, setModalView } from 'redux/Slices/UISlice'
 
 interface Props {}
 
 const SignUpView: FC<Props> = () => {
+  const dispatch = useAppDispatch()
   // Form State
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -19,9 +23,15 @@ const SignUpView: FC<Props> = () => {
   const [disabled, setDisabled] = useState(false)
 
   const signup = useSignup()
-  const { setModalView, closeModal } = useUI()
 
-  const handleSignup = async (e: React.SyntheticEvent<EventTarget>) => {
+  const handleModal = (view: MODAL_VIEWS) => {
+    dispatch(setModalView(view))
+  }
+  const handleClose = () => {
+    dispatch(closeModal())
+  }
+
+  const handleSignup = async (e: SyntheticEvent<EventTarget>) => {
     e.preventDefault()
 
     if (!dirty && !disabled) {
@@ -39,7 +49,7 @@ const SignUpView: FC<Props> = () => {
         password,
       })
       setLoading(false)
-      closeModal()
+      handleClose()
     } catch ({ errors }) {
       console.error(errors)
       if (errors instanceof Array) {
@@ -112,7 +122,7 @@ const SignUpView: FC<Props> = () => {
           {` `}
           <a
             className="text-accent-9 font-bold hover:underline cursor-pointer"
-            onClick={() => setModalView('LOGIN_VIEW')}
+            onClick={() => handleModal('LOGIN_VIEW')}
           >
             Log In
           </a>

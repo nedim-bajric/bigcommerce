@@ -1,41 +1,53 @@
-import cn from 'clsx'
+import { FC, Fragment } from 'react'
 import Link from 'next/link'
+
+import cn from 'clsx'
+
 import s from './UserNav.module.css'
 import { Avatar } from '@components/common'
+import { useAppDispatch } from 'redux/hooks'
 import useCart from '@framework/cart/use-cart'
-import { useUI } from '@components/ui/context'
+import type { LineItem } from '@commerce/types/cart'
 import { Heart, Bag, Menu } from '@components/icons'
 import CustomerMenuContent from './CustomerMenuContent'
 import useCustomer from '@framework/customer/use-customer'
-import React from 'react'
 import {
   Dropdown,
   DropdownTrigger as DropdownTriggerInst,
   Button,
 } from '@components/ui'
-
-import type { LineItem } from '@commerce/types/cart'
+import {
+  closeSidebarIfPresent,
+  openModal,
+  openSidebar,
+  setSidebarView,
+  SIDEBAR_VIEWS,
+} from 'redux/Slices/UISlice'
 
 const countItem = (count: number, item: LineItem) => count + item.quantity
 
-const UserNav: React.FC<{
+const UserNav: FC<{
   className?: string
 }> = ({ className }) => {
+  const dispatch = useAppDispatch()
   const { data } = useCart()
   const { data: isCustomerLoggedIn } = useCustomer()
-  const {
-    toggleSidebar,
-    closeSidebarIfPresent,
-    openModal,
-    setSidebarView,
-    openSidebar,
-  } = useUI()
 
   const itemsCount = data?.lineItems?.reduce(countItem, 0) ?? 0
-  const DropdownTrigger = isCustomerLoggedIn
-    ? DropdownTriggerInst
-    : React.Fragment
+  const DropdownTrigger = isCustomerLoggedIn ? DropdownTriggerInst : Fragment
 
+  const handleSidebar = (view: SIDEBAR_VIEWS) => {
+    dispatch(openSidebar())
+    dispatch(setSidebarView(view))
+  }
+
+  const handleIfPresent = () => {
+    dispatch(closeSidebarIfPresent())
+  }
+
+  const handleModal = () => {
+    isCustomerLoggedIn ? null : dispatch(openModal())
+  }
   return (
     <nav className={cn(s.root, className)}>
       <ul className={s.list}>
@@ -45,8 +57,7 @@ const UserNav: React.FC<{
               className={s.item}
               variant="naked"
               onClick={() => {
-                setSidebarView('CART_VIEW')
-                openSidebar()
+                handleSidebar('CART_VIEW')
               }}
               aria-label={`Cart items: ${itemsCount}`}
             >
@@ -60,7 +71,7 @@ const UserNav: React.FC<{
         {process.env.COMMERCE_WISHLIST_ENABLED && (
           <li className={s.item}>
             <Link href="/wishlist" legacyBehavior>
-              <a onClick={closeSidebarIfPresent} aria-label="Wishlist">
+              <a onClick={handleIfPresent} aria-label="Wishlist">
                 <Heart />
               </a>
             </Link>
@@ -73,7 +84,7 @@ const UserNav: React.FC<{
                 <button
                   aria-label="Menu"
                   className={s.avatarButton}
-                  onClick={() => (isCustomerLoggedIn ? null : openModal())}
+                  onClick={handleModal}
                 >
                   <Avatar />
                 </button>
@@ -88,8 +99,7 @@ const UserNav: React.FC<{
             aria-label="Menu"
             variant="naked"
             onClick={() => {
-              setSidebarView('MOBILE_MENU_VIEW')
-              openSidebar()
+              handleSidebar('MOBILE_MENU_VIEW')
             }}
           >
             <Menu />

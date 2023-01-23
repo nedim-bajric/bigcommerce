@@ -6,7 +6,8 @@ import { Layout } from '@components/common'
 import { Button, Text, Container } from '@components/ui'
 import { Bag, Cross, Check, MapPin, CreditCard } from '@components/icons'
 import { CartItem } from '@components/cart'
-import { useUI } from '@components/ui/context'
+import { useAppDispatch } from 'redux/hooks'
+import { openSidebar, setSidebarView } from 'redux/Slices/UISlice'
 
 export async function getStaticProps({
   preview,
@@ -19,15 +20,15 @@ export async function getStaticProps({
   // const { pages } = await pagesPromise
   const { categories } = await siteInfoPromise
   return {
-    props: {categories },
+    props: { categories },
   }
 }
 
 export default function Cart() {
+  const dispatch = useAppDispatch()
   const error = null
   const success = null
   const { data, isLoading, isEmpty } = useCart()
-  const { openSidebar, setSidebarView } = useUI()
 
   const { price: subTotal } = usePrice(
     data && {
@@ -43,8 +44,8 @@ export default function Cart() {
   )
 
   const goToCheckout = () => {
-    openSidebar()
-    setSidebarView('CHECKOUT_VIEW')
+    dispatch(openSidebar())
+    dispatch(setSidebarView('CHECKOUT_VIEW'))
   }
 
   return (

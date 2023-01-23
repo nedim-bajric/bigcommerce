@@ -1,11 +1,16 @@
 import { FC, useEffect, useState, useCallback } from 'react'
+
 import { validate } from 'email-validator'
-import { useUI } from '@components/ui/context'
+
+import { useAppDispatch } from 'redux/hooks'
+import { setModalView } from 'redux/Slices/UISlice'
 import { Logo, Button, Input } from '@components/ui'
 
 interface Props {}
 
 const ForgotPassword: FC<Props> = () => {
+  const dispatch = useAppDispatch()
+
   // Form State
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
@@ -13,7 +18,9 @@ const ForgotPassword: FC<Props> = () => {
   const [dirty, setDirty] = useState(false)
   const [disabled, setDisabled] = useState(false)
 
-  const { setModalView, closeModal } = useUI()
+  const handleModal = () => {
+    dispatch(setModalView('LOGIN_VIEW'))
+  }
 
   const handleResetPassword = async (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault()
@@ -65,7 +72,7 @@ const ForgotPassword: FC<Props> = () => {
           {` `}
           <a
             className="text-accent-9 font-bold hover:underline cursor-pointer"
-            onClick={() => setModalView('LOGIN_VIEW')}
+            onClick={handleModal}
           >
             Log In
           </a>

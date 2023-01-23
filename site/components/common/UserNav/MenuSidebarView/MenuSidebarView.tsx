@@ -1,30 +1,29 @@
 import Link from 'next/link'
 import s from './MenuSidebarView.module.css'
-import { useUI } from '@components/ui/context'
 import SidebarLayout from '@components/common/SidebarLayout'
 import type { Link as LinkProps } from './index'
+import { useAppDispatch } from 'redux/hooks'
+import { closeSidebar } from 'redux/Slices/UISlice'
 
 export default function MenuSidebarView({
   links = [],
 }: {
   links?: LinkProps[]
 }) {
-  const { closeSidebar } = useUI()
+  const dispatch = useAppDispatch()
+
+  const handleClose = () => dispatch(closeSidebar())
 
   return (
-    <SidebarLayout handleClose={() => closeSidebar()}>
+    <SidebarLayout handleClose={handleClose}>
       <div className={s.root}>
         <nav>
           <ul>
-            <li className={s.item} onClick={() => closeSidebar()}>
+            <li className={s.item} onClick={handleClose}>
               <Link href="/search">All</Link>
             </li>
             {links.map((l: any) => (
-              <li
-                key={l.href}
-                className={s.item}
-                onClick={() => closeSidebar()}
-              >
+              <li key={l.href} className={s.item} onClick={handleClose}>
                 <Link href={l.href}>{l.label}</Link>
               </li>
             ))}

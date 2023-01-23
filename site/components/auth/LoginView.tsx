@@ -1,10 +1,14 @@
-import { FC, useEffect, useState, useCallback } from 'react'
-import { Logo, Button, Input } from '@components/ui'
-import useLogin from '@framework/auth/use-login'
-import { useUI } from '@components/ui/context'
+import { FC, useEffect, useState, useCallback, SyntheticEvent } from 'react'
+
 import { validate } from 'email-validator'
 
-const LoginView: React.FC = () => {
+import { useAppDispatch } from 'redux/hooks'
+import useLogin from '@framework/auth/use-login'
+import { Logo, Button, Input } from '@components/ui'
+import { MODAL_VIEWS, setModalView, closeModal } from 'redux/Slices/UISlice'
+
+const LoginView: FC = () => {
+  const dispatch = useAppDispatch()
   // Form State
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -12,11 +16,16 @@ const LoginView: React.FC = () => {
   const [message, setMessage] = useState('')
   const [dirty, setDirty] = useState(false)
   const [disabled, setDisabled] = useState(false)
-  const { setModalView, closeModal } = useUI()
 
   const login = useLogin()
 
-  const handleLogin = async (e: React.SyntheticEvent<EventTarget>) => {
+  const handleModal = (view: MODAL_VIEWS) => {
+    dispatch(setModalView(view))
+  }
+  const handleClose = () => {
+    dispatch(closeModal())
+  }
+  const handleLogin = async (e: SyntheticEvent<EventTarget>) => {
     e.preventDefault()
 
     if (!dirty && !disabled) {
@@ -32,7 +41,7 @@ const LoginView: React.FC = () => {
         password,
       })
       setLoading(false)
-      closeModal()
+      handleClose()
     } catch ({ errors }) {
       if (errors instanceof Array) {
         setMessage(errors.map((e: any) => e.message).join('<br/>'))
@@ -72,7 +81,7 @@ const LoginView: React.FC = () => {
             {message}. Did you {` `}
             <a
               className="text-accent-9 inline font-bold hover:underline cursor-pointer"
-              onClick={() => setModalView('FORGOT_VIEW')}
+              onClick={() => handleModal('FORGOT_VIEW')}
             >
               forgot your password?
             </a>
@@ -94,7 +103,7 @@ const LoginView: React.FC = () => {
           {` `}
           <a
             className="text-accent-9 font-bold hover:underline cursor-pointer"
-            onClick={() => setModalView('SIGNUP_VIEW')}
+            onClick={() => handleModal('SIGNUP_VIEW')}
           >
             Sign Up
           </a>

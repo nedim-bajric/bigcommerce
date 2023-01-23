@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { CommerceProvider } from '@framework'
 import LoginView from '@components/auth/LoginView'
-import { useUI } from '@components/ui/context'
 import { Navbar, Footer } from '@components/common'
 import ShippingView from '@components/checkout/ShippingView'
 import CartSidebarView from '@components/cart/CartSidebarView'
@@ -17,6 +16,8 @@ import { MenuSidebarView } from '@components/common/UserNav'
 import type { Page } from '@commerce/types/page'
 import type { Category } from '@commerce/types/site'
 import type { Link as LinkProps } from '../UserNav/MenuSidebarView'
+import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import { closeModal, closeSidebar } from 'redux/Slices/UISlice'
 
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">
@@ -70,9 +71,12 @@ const ModalView: React.FC<{ modalView: string; closeModal(): any }> = ({
 }
 
 const ModalUI: React.FC = () => {
-  const { displayModal, closeModal, modalView } = useUI()
+  const dispatch = useAppDispatch()
+  const displayModal = useAppSelector((state) => state.ui.displayModal)
+  const modalView = useAppSelector((state) => state.ui.modalView)
+  const handleCloseModal = () => dispatch(closeModal())
   return displayModal ? (
-    <ModalView modalView={modalView} closeModal={closeModal} />
+    <ModalView modalView={modalView} closeModal={handleCloseModal} />
   ) : null
 }
 
@@ -93,12 +97,17 @@ const SidebarView: React.FC<{
 }
 
 const SidebarUI: React.FC<{ links: LinkProps[] }> = ({ links }) => {
-  const { displaySidebar, closeSidebar, sidebarView } = useUI()
+  const dispatch = useAppDispatch()
+
+  const displaySidebar = useAppSelector((state) => state.ui.displaySidebar)
+  const sidebarView = useAppSelector((state) => state.ui.sidebarView)
+
+  const handleCloseSidebar = () => dispatch(closeSidebar())
   return displaySidebar ? (
     <SidebarView
       links={links}
       sidebarView={sidebarView}
-      closeSidebar={closeSidebar}
+      closeSidebar={handleCloseSidebar}
     />
   ) : null
 }

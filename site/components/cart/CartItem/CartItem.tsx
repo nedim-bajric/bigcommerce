@@ -3,12 +3,13 @@ import cn from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import s from './CartItem.module.css'
-import { useUI } from '@components/ui/context'
 import type { LineItem } from '@commerce/types/cart'
 import usePrice from '@framework/product/use-price'
 import useUpdateItem from '@framework/cart/use-update-item'
 import useRemoveItem from '@framework/cart/use-remove-item'
 import Quantity from '@components/ui/Quantity'
+import { useAppDispatch } from 'redux/hooks'
+import { closeSidebarIfPresent } from 'redux/Slices/UISlice'
 
 type ItemOption = {
   name: string
@@ -29,7 +30,7 @@ const CartItem = ({
   item: LineItem
   currencyCode: string
 }) => {
-  const { closeSidebarIfPresent } = useUI()
+  const dispatch = useAppDispatch()
   const [removing, setRemoving] = useState(false)
   const [quantity, setQuantity] = useState<number>(item.quantity)
   const removeItem = useRemoveItem()
@@ -41,6 +42,9 @@ const CartItem = ({
     currencyCode,
   })
 
+  const handleClose = () => {
+    dispatch(closeSidebarIfPresent())
+  }
   const handleChange = async ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => {
@@ -87,7 +91,7 @@ const CartItem = ({
         <div className="w-16 h-16 bg-violet relative overflow-hidden cursor-pointer">
           <Link href={`/product/${item.path}`}>
             <Image
-              onClick={() => closeSidebarIfPresent()}
+              onClick={handleClose}
               className={s.productImage}
               width={64}
               height={64}
@@ -98,10 +102,7 @@ const CartItem = ({
         </div>
         <div className="flex-1 flex flex-col text-base">
           <Link href={`/product/${item.path}`}>
-            <span
-              className={s.productName}
-              onClick={() => closeSidebarIfPresent()}
-            >
+            <span className={s.productName} onClick={handleClose}>
               {item.name}
             </span>
           </Link>

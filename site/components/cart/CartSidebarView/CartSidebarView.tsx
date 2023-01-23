@@ -4,14 +4,15 @@ import { FC } from 'react'
 import s from './CartSidebarView.module.css'
 import CartItem from '../CartItem'
 import { Button, Text } from '@components/ui'
-import { useUI } from '@components/ui/context'
 import { Bag, Cross, Check } from '@components/icons'
 import useCart from '@framework/cart/use-cart'
 import usePrice from '@framework/product/use-price'
 import SidebarLayout from '@components/common/SidebarLayout'
+import { useAppDispatch } from 'redux/hooks'
+import { closeSidebar, setSidebarView } from 'redux/Slices/UISlice'
 
 const CartSidebarView: FC = () => {
-  const { closeSidebar, setSidebarView } = useUI()
+  const dispatch = useAppDispatch()
   const { data, isLoading, isEmpty } = useCart()
 
   const { price: subTotal } = usePrice(
@@ -26,8 +27,9 @@ const CartSidebarView: FC = () => {
       currencyCode: data.currency.code,
     }
   )
-  const handleClose = () => closeSidebar()
-  const goToCheckout = () => setSidebarView('CHECKOUT_VIEW')
+
+  const handleClose = () => dispatch(closeSidebar())
+  const goToCheckout = () => dispatch(setSidebarView('CHECKOUT_VIEW'))
 
   const error = null
   const success = null

@@ -3,10 +3,11 @@ import cn from 'clsx'
 
 import useAddCard from '@framework/customer/card/use-add-item'
 import { Button, Text } from '@components/ui'
-import { useUI } from '@components/ui/context'
 import SidebarLayout from '@components/common/SidebarLayout'
 
 import s from './PaymentMethodView.module.css'
+import { useAppDispatch } from 'redux/hooks'
+import { setSidebarView } from 'redux/Slices/UISlice'
 
 interface Form extends HTMLFormElement {
   cardHolder: HTMLInputElement
@@ -23,9 +24,12 @@ interface Form extends HTMLFormElement {
 }
 
 const PaymentMethodView: FC = () => {
-  const { setSidebarView } = useUI()
+  const dispatch = useAppDispatch()
   const addCard = useAddCard()
 
+  const handleSidebar = () => {
+    dispatch(setSidebarView('CHECKOUT_VIEW'))
+  }
   async function handleSubmit(event: React.ChangeEvent<Form>) {
     event.preventDefault()
 
@@ -43,12 +47,12 @@ const PaymentMethodView: FC = () => {
       country: event.target.country.value,
     })
 
-    setSidebarView('CHECKOUT_VIEW')
+    handleSidebar()
   }
 
   return (
     <form className="h-full" onSubmit={handleSubmit}>
-      <SidebarLayout handleBack={() => setSidebarView('CHECKOUT_VIEW')}>
+      <SidebarLayout handleBack={handleSidebar}>
         <div className="px-4 sm:px-6 flex-1">
           <Text variant="sectionHeading"> Payment Method</Text>
           <div>
