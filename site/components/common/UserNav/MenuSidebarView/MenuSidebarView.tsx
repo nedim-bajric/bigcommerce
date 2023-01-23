@@ -3,7 +3,7 @@ import s from './MenuSidebarView.module.css'
 import SidebarLayout from '@components/common/SidebarLayout'
 import type { Link as LinkProps } from './index'
 import { useAppDispatch } from 'redux/hooks'
-import { closeSidebar } from 'redux/Slices/UISlice'
+import { closeSidebar } from 'redux/Slices/uiSlice'
 
 export default function MenuSidebarView({
   links = [],

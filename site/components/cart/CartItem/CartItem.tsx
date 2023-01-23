@@ -9,7 +9,7 @@ import useUpdateItem from '@framework/cart/use-update-item'
 import useRemoveItem from '@framework/cart/use-remove-item'
 import Quantity from '@components/ui/Quantity'
 import { useAppDispatch } from 'redux/hooks'
-import { closeSidebarIfPresent } from 'redux/Slices/UISlice'
+import { closeSidebarIfPresent } from 'redux/Slices/uiSlice'
 
 type ItemOption = {
   name: string

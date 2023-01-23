@@ -11,7 +11,7 @@ import {
 } from '../helpers'
 import ErrorMessage from '@components/ui/ErrorMessage'
 import { useAppDispatch } from 'redux/hooks'
-import { openSidebar, setSidebarView } from 'redux/Slices/UISlice'
+import { openSidebar, setSidebarView } from 'redux/Slices/uiSlice'
 
 interface ProductSidebarProps {
   product: Product

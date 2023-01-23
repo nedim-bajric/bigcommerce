@@ -8,7 +8,7 @@ import useRemoveItem from '@framework/wishlist/use-remove-item'
 import s from './WishlistButton.module.css'
 import type { Product, ProductVariant } from '@commerce/types/product'
 import { useAppDispatch } from 'redux/hooks'
-import { openModal, setModalView } from 'redux/Slices/UISlice'
+import { openModal, setModalView } from 'redux/Slices/uiSlice'
 
 type Props = {
   productId: Product['id']

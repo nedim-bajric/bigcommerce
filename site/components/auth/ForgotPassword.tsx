@@ -3,7 +3,7 @@ import { FC, useEffect, useState, useCallback } from 'react'
 import { validate } from 'email-validator'
 
 import { useAppDispatch } from 'redux/hooks'
-import { setModalView } from 'redux/Slices/UISlice'
+import { setModalView } from 'redux/Slices/uiSlice'
 import { Logo, Button, Input } from '@components/ui'
 
 interface Props {}

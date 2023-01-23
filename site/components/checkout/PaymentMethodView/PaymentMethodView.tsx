@@ -7,7 +7,7 @@ import SidebarLayout from '@components/common/SidebarLayout'
 
 import s from './PaymentMethodView.module.css'
 import { useAppDispatch } from 'redux/hooks'
-import { setSidebarView } from 'redux/Slices/UISlice'
+import { setSidebarView } from 'redux/Slices/uiSlice'
 
 interface Form extends HTMLFormElement {
   cardHolder: HTMLInputElement

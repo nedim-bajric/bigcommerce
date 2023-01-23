@@ -12,7 +12,7 @@ import useAddItem from '@framework/cart/use-add-item'
 import useRemoveItem from '@framework/wishlist/use-remove-item'
 import type { WishlistItem } from '@commerce/types/wishlist'
 import { useAppDispatch } from 'redux/hooks'
-import { openSidebar } from 'redux/Slices/UISlice'
+import { openSidebar } from 'redux/Slices/uiSlice'
 
 const placeholderImg = '/product-img-placeholder.svg'
 

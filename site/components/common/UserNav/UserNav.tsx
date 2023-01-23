@@ -22,7 +22,7 @@ import {
   openSidebar,
   setSidebarView,
   SIDEBAR_VIEWS,
-} from 'redux/Slices/UISlice'
+} from 'redux/Slices/uiSlice'
 
 const countItem = (count: number, item: LineItem) => count + item.quantity
 

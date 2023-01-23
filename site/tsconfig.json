@@ -18,6 +18,7 @@
     "incremental": true,
     "paths": {
       "@lib/*": ["lib/*"],
+      "@redux/*": ["redux/Slices/*"],
       "@utils/*": ["utils/*"],
       "@config/*": ["config/*"],
       "@assets/*": ["assets/*"],

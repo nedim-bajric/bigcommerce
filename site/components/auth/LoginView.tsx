@@ -5,7 +5,7 @@ import { validate } from 'email-validator'
 import { useAppDispatch } from 'redux/hooks'
 import useLogin from '@framework/auth/use-login'
 import { Logo, Button, Input } from '@components/ui'
-import { MODAL_VIEWS, setModalView, closeModal } from 'redux/Slices/UISlice'
+import { MODAL_VIEWS, setModalView, closeModal } from 'redux/Slices/uiSlice'
 
 const LoginView: FC = () => {
   const dispatch = useAppDispatch()

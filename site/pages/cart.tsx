@@ -7,7 +7,7 @@ import { Button, Text, Container } from '@components/ui'
 import { Bag, Cross, Check, MapPin, CreditCard } from '@components/icons'
 import { CartItem } from '@components/cart'
 import { useAppDispatch } from 'redux/hooks'
-import { openSidebar, setSidebarView } from 'redux/Slices/UISlice'
+import { openSidebar, setSidebarView } from 'redux/Slices/uiSlice'
 
 export async function getStaticProps({
   preview,

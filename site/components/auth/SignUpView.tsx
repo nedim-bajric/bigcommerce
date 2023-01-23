@@ -6,7 +6,7 @@ import { Info } from '@components/icons'
 import { useAppDispatch } from 'redux/hooks'
 import useSignup from '@framework/auth/use-signup'
 import { Logo, Button, Input } from '@components/ui'
-import { closeModal, MODAL_VIEWS, setModalView } from 'redux/Slices/UISlice'
+import { closeModal, MODAL_VIEWS, setModalView } from 'redux/Slices/uiSlice'
 
 interface Props {}
 

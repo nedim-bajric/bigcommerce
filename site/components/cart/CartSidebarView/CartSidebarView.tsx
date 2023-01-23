@@ -9,7 +9,7 @@ import useCart from '@framework/cart/use-cart'
 import usePrice from '@framework/product/use-price'
 import SidebarLayout from '@components/common/SidebarLayout'
 import { useAppDispatch } from 'redux/hooks'
-import { closeSidebar, setSidebarView } from 'redux/Slices/UISlice'
+import { closeSidebar, setSidebarView } from 'redux/Slices/uiSlice'
 
 const CartSidebarView: FC = () => {
   const dispatch = useAppDispatch()

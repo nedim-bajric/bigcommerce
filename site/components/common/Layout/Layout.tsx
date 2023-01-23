@@ -17,7 +17,7 @@ import type { Page } from '@commerce/types/page'
 import type { Category } from '@commerce/types/site'
 import type { Link as LinkProps } from '../UserNav/MenuSidebarView'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
-import { closeModal, closeSidebar } from 'redux/Slices/UISlice'
+import { closeModal, closeSidebar } from 'redux/Slices/uiSlice'
 
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">

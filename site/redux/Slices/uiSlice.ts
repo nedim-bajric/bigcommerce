@@ -32,7 +32,7 @@ const initialState: UIState = {
   sidebarView: 'CART_VIEW',
 }
 
-export const UISlice = createSlice({
+export const uiSlice = createSlice({
   name: 'UI',
   initialState,
   reducers: {
@@ -80,6 +80,6 @@ export const {
   closeModal,
   setModalView,
   setSidebarView,
-} = UISlice.actions
+} = uiSlice.actions
 
-export default UISlice.reducer
+export default uiSlice.reducer

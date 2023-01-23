@@ -7,7 +7,7 @@ import useAddAddress from '@framework/customer/address/use-add-item'
 
 import s from './ShippingView.module.css'
 import { useAppDispatch } from 'redux/hooks'
-import { setSidebarView } from 'redux/Slices/UISlice'
+import { setSidebarView } from 'redux/Slices/uiSlice'
 
 interface Form extends HTMLFormElement {
   cardHolder: HTMLInputElement

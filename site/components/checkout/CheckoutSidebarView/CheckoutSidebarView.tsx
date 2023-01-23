@@ -15,7 +15,7 @@ import {
   closeSidebar,
   setSidebarView,
   SIDEBAR_VIEWS,
-} from 'redux/Slices/UISlice'
+} from 'redux/Slices/uiSlice'
 
 const CheckoutSidebarView: FC = () => {
   const dispatch = useAppDispatch()
