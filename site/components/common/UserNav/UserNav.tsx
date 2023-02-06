@@ -4,18 +4,14 @@ import Link from 'next/link'
 import cn from 'clsx'
 
 import s from './UserNav.module.css'
-import { Avatar } from '@components/common'
+import { Avatar } from '@common'
 import { useAppDispatch } from 'redux/hooks'
 import useCart from '@framework/cart/use-cart'
 import type { LineItem } from '@commerce/types/cart'
-import { Heart, Bag, Menu } from '@components/pages/icons'
+import { Heart, Bag, Menu } from '@icons'
 import CustomerMenuContent from './CustomerMenuContent'
 import useCustomer from '@framework/customer/use-customer'
-import {
-  Dropdown,
-  DropdownTrigger as DropdownTriggerInst,
-  Button,
-} from '@components/ui'
+import { Dropdown, DropdownTrigger as DropdownTriggerInst, Button } from '@ui'
 import {
   closeSidebarIfPresent,
   openModal,

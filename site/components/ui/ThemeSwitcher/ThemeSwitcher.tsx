@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ChevronRight, Cross } from '@components/pages/icons'
+import { ChevronRight, Cross } from '@icons'
 import { useToggleTheme } from '@lib/hooks/useToggleTheme'
 import cn from 'clsx'
 import ClickOutside from '@lib/click-outside'

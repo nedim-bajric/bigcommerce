@@ -1,7 +1,7 @@
 import commerce from '@lib/api/commerce'
-import { Layout } from '@components/common'
-import { ProductCard } from '@components/pages/product'
-import { Grid, Marquee, Hero } from '@components/ui'
+import { Layout } from '@common'
+import { ProductCard } from '@components/product'
+import { Grid, Marquee, Hero } from '@ui'
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 

@@ -1,4 +1,4 @@
-import { Moon, Sun, System } from '@components/pages/icons'
+import { Moon, Sun, System } from '@icons'
 
 interface ThemeIconProps {
   theme?: string

@@ -1,7 +1,7 @@
 import type { GetStaticPropsContext } from 'next'
 import commerce from '@lib/api/commerce'
-import { Layout } from '@components/common'
-import { Text } from '@components/ui'
+import { Layout } from '@common'
+import { Text } from '@ui'
 
 export async function getStaticProps({
   preview,
@@ -13,7 +13,6 @@ export async function getStaticProps({
   const { categories, brands } = await commerce.getSiteInfo({ config, preview })
   return {
     props: {
-
       categories,
       brands,
     },
