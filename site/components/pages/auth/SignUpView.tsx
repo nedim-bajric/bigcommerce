@@ -2,7 +2,7 @@ import { FC, useEffect, useState, useCallback, SyntheticEvent } from 'react'
 
 import { validate } from 'email-validator'
 
-import { Info } from '@components/icons'
+import { Info } from '@components/pages/icons'
 import { useAppDispatch } from 'redux/hooks'
 import useSignup from '@framework/auth/use-signup'
 import { Logo, Button, Input } from '@components/ui'

@@ -8,7 +8,7 @@ import type { Brand } from '@commerce/types/site'
 import type { Product } from '@commerce/types/product'
 
 import { Layout } from '@components/common'
-import { ProductCard } from '@components/product'
+import { ProductCard } from '@components/pages/product'
 import { Container, Skeleton } from '@components/ui'
 
 import useSearch from '@framework/product/use-search'
@@ -27,7 +27,7 @@ import {
   getDesignerPath,
   useSearchMeta,
 } from '@lib/search'
-import ErrorMessage from './ui/ErrorMessage'
+import ErrorMessage from '../../ui/ErrorMessage'
 
 export default function Search({ categories, brands }: SearchPropsType) {
   const [activeFilter, setActiveFilter] = useState('')

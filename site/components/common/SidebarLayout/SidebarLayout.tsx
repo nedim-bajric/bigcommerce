@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react'
-import { Cross, ChevronLeft } from '@components/icons'
+import { Cross, ChevronLeft } from '@components/pages/icons'
 import { UserNav } from '@components/common'
 import cn from 'clsx'
 import s from './SidebarLayout.module.css'

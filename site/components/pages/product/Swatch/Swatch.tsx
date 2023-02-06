@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import React from 'react'
 import s from './Swatch.module.css'
-import { Check } from '@components/icons'
+import { Check } from '@components/pages/icons'
 import Button, { ButtonProps } from '@components/ui/Button'
 import { isDark } from '@lib/colors'
 interface SwatchProps {

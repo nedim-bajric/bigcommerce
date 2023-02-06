@@ -8,7 +8,7 @@ import { Avatar } from '@components/common'
 import { useAppDispatch } from 'redux/hooks'
 import useCart from '@framework/cart/use-cart'
 import type { LineItem } from '@commerce/types/cart'
-import { Heart, Bag, Menu } from '@components/icons'
+import { Heart, Bag, Menu } from '@components/pages/icons'
 import CustomerMenuContent from './CustomerMenuContent'
 import useCustomer from '@framework/customer/use-customer'
 import {

@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import React, { FC, ReactNode, useState } from 'react'
 import s from './Collapse.module.css'
-import { ChevronRight } from '@components/icons'
+import { ChevronRight } from '@components/pages/icons'
 import { useSpring, a } from '@react-spring/web'
 import useMeasure from 'react-use-measure'
 
