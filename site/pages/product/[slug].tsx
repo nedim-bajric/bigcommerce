@@ -6,7 +6,7 @@ import type {
 import { useRouter } from 'next/router'
 import commerce from '@lib/api/commerce'
 import { Layout } from '@common'
-import { ProductView } from '@components/pages/product'
+import { ProductView } from '@components/product'
 
 export async function getStaticProps({
   params,

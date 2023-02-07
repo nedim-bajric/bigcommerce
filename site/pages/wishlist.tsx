@@ -4,7 +4,7 @@ import { Heart } from '@icons'
 import { Layout } from '@common'
 import { Text, Container, Skeleton } from '@ui'
 import { useCustomer } from '@framework/customer'
-import { WishlistCard } from '@components/pages/wishlist'
+import { WishlistCard } from '@components/wishlist'
 import useWishlist from '@framework/wishlist/use-wishlist'
 import rangeMap from '@lib/range-map'
 
