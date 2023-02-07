@@ -22,6 +22,7 @@
       "@utils/*": ["utils/*"],
       "@config/*": ["config/*"],
       "@assets/*": ["assets/*"],
+      "@styles": ["styles/global.css"],
       "@ui": ["components/ui"],
       "@common": ["components/common"],
       "@icons": ["components/icons"],

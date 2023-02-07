@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import sampleReducer from './Slices/SampleSlice'
-import uiReducer from './Slices/uiSlice'
 export const store = configureStore({
   reducer: {
     sample: sampleReducer,
-    ui: uiReducer,
   },
 })
 
